@@ -4,6 +4,8 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.paging.compose.LazyPagingItems
+import androidx.paging.compose.collectAsLazyPagingItems
 import com.gmail.orlandroyd.repositoriesapp.ui.theme.RepositoriesAppTheme
 
 class MainActivity : ComponentActivity() {
@@ -12,8 +14,11 @@ class MainActivity : ComponentActivity() {
         setContent {
             RepositoriesAppTheme {
                 val viewModel: RepositoriesViewModel = viewModel()
-                val repos = viewModel.repositories.value
-                RepositoriesScreen(repos)
+                val reposFlow = viewModel.repositories
+                val lazyRepoItems
+                        : LazyPagingItems<Repository> =
+                    reposFlow.collectAsLazyPagingItems()
+                RepositoriesScreen(lazyRepoItems)
             }
         }
     }

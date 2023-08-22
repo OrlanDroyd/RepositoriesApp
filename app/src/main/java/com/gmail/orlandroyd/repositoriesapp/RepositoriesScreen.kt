@@ -27,13 +27,19 @@ import androidx.paging.compose.itemKey
 
 
 @Composable
-fun RepositoriesScreen(repos: LazyPagingItems<Repository>) {
+fun RepositoriesScreen(
+    repos: LazyPagingItems<Repository>,
+    timerText: String
+) {
     LazyColumn(
         contentPadding = PaddingValues(
             vertical = 8.dp,
             horizontal = 8.dp
         )
     ) {
+        item {
+            CountdownItem(timerText)
+        }
         items(
             count = repos.itemCount,
             key = repos.itemKey(),
@@ -148,4 +154,9 @@ fun ErrorItem(
             modifier = Modifier.padding(8.dp)
         ) { Text(text = "Try again") }
     }
+}
+
+@Composable
+private fun CountdownItem(timerText: String) {
+    Text(timerText)
 }

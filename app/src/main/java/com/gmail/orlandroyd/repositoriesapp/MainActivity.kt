@@ -15,10 +15,11 @@ class MainActivity : ComponentActivity() {
             RepositoriesAppTheme {
                 val viewModel: RepositoriesViewModel = viewModel()
                 val reposFlow = viewModel.repositories
+                val timerText = viewModel.timerState.value
                 val lazyRepoItems
                         : LazyPagingItems<Repository> =
                     reposFlow.collectAsLazyPagingItems()
-                RepositoriesScreen(lazyRepoItems)
+                RepositoriesScreen(lazyRepoItems, timerText)
             }
         }
     }

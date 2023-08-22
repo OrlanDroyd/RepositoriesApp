@@ -19,7 +19,7 @@ class MainActivity : ComponentActivity() {
                 val lazyRepoItems
                         : LazyPagingItems<Repository> =
                     reposFlow.collectAsLazyPagingItems()
-                RepositoriesScreen(lazyRepoItems, timerText)
+                RepositoriesScreen(lazyRepoItems, timerText, viewModel::timer)
             }
         }
     }
